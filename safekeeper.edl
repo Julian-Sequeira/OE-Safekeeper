@@ -1,0 +1,18 @@
+enclave {
+    from "openenclave/edl/syscall.edl" import *;
+    from "platform.edl" import *;
+
+    trusted {
+        public void generate_safekey();
+        public void seal_safekey(
+            int sealPolicy;
+            [out] sealed_data_t* sealed_safekey;
+        );
+        public void hash_password(
+            [in, count=input_size] unsigned char* input;
+            size_t input_size;
+            [in, count=salt_size] unsigned char* salt;
+            [out] unsigned char* output;
+        );
+    }
+}
